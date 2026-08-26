@@ -11,6 +11,17 @@ league baked in. Every visitor brings their own username/league; nothing
 is stored, no login exists, and one visitor's data never leaks into
 another's view (see [Privacy & caching](#privacy--caching) below).
 
+## Pricing
+
+**Pin (revisit later): there is no paid tier yet.** Every feature and every
+detailed stat - the full Opportunity Score breakdown, ECR, the FAAB bid
+formula and its sliders, both report downloads - is available to every
+visitor at no cost, with no signup and no usage limit. This is a
+deliberate placeholder, not a permanent decision: no feature-gating or
+paywall scaffolding exists in the code, so if a free/paid split gets
+designed later it should be built fresh against whatever the actual plan
+is, rather than un-commenting something half-built here.
+
 ## What it actually does
 
 1. **Pulls your league from Sleeper** - every rostered player and every
