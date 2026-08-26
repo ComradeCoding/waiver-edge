@@ -1,12 +1,14 @@
-# Dark theme with a teal accent, matching the rest of the tool suite
-# (see Leaguemate Scout). Streamlit reads this automatically - no code
-# needed in app.py to pick these up.
+# "Commish" scoreboard theme: navy ink surfaces, one signal-orange accent.
+# Streamlit reads these natively (buttons, sliders, tabs, links all pick up
+# primaryColor automatically) - app.py layers the rest (fonts, textures,
+# flat surfaces, semantic green/red/yellow) on top with injected CSS,
+# since Streamlit's theme config alone can't express those.
 [theme]
 base = "dark"
-primaryColor = "#2dd4bf"
-backgroundColor = "#0e1117"
-secondaryBackgroundColor = "#1c1f26"
-textColor = "#e6e6e6"
+primaryColor = "#FF6B2C"            # signal-500
+backgroundColor = "#0B162A"         # ink-900
+secondaryBackgroundColor = "#13243D"  # ink-800
+textColor = "#E0E7F0"               # ink-100
 font = "sans serif"
 
 [server]

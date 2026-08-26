@@ -32,7 +32,7 @@ from dotenv import load_dotenv
 # set there too - never required either way.
 load_dotenv()
 
-from waiveredge import pipeline, report, sleeper
+from waiveredge import pipeline, report, sleeper, theme
 from waiveredge.config import WaiverEdgeConfig
 from waiveredge.sleeper import SleeperError
 
@@ -51,16 +51,10 @@ except ImportError:  # pragma: no cover - defensive only, see fallback below
 
 st.set_page_config(page_title="Waiver Edge", page_icon="🏈", layout="wide")
 
-# A little CSS so the tab labels read like the rest of the suite
-# (uppercase, letter-spaced) - purely cosmetic, no behavior here.
-st.markdown(
-    """
-    <style>
-    button[data-baseweb="tab"] p { text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# "Commish" scoreboard theme - see src/waiveredge/theme.py for the palette
+# and why each override exists. .streamlit/config.toml handles the parts
+# Streamlit's native theme engine understands; this fills in the rest.
+st.markdown(theme.CSS, unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------------------
@@ -267,17 +261,26 @@ if used_fallback_season is not None:
     )
 
 st.subheader(f"{result.league_name} - {result.my_team_name}")
-st.metric("Your remaining FAAB", f"${result.my_remaining_budget}")
 
+tile_color, tier_label = theme.faab_tier(result.my_remaining_budget, gathered.league_total_budget)
+st.markdown(
+    theme.scoreboard_tile_html("Your remaining FAAB", f"${result.my_remaining_budget}", tile_color, tier_label),
+    unsafe_allow_html=True,
+)
+
+display_df = result.results[
+    ["name", "position", "team", "opportunity_score", "ecr", "recommended_bid", "rationale"]
+].rename(columns={
+    "name": "Player", "position": "Pos", "team": "Team",
+    "opportunity_score": "Score", "ecr": "ECR (context only)",
+    "recommended_bid": "Bid ($)", "rationale": "Why",
+})
 st.dataframe(
-    result.results[["name", "position", "team", "opportunity_score", "ecr", "recommended_bid", "rationale"]]
-    .rename(columns={
-        "name": "Player", "position": "Pos", "team": "Team",
-        "opportunity_score": "Score", "ecr": "ECR (context only)",
-        "recommended_bid": "Bid ($)", "rationale": "Why",
-    })
-    .style.format({"Score": "{:.0f}", "ECR (context only)": "{:.0f}"}),
-    use_container_width=True,
+    display_df.style
+    .format({"Score": "{:.0f}", "ECR (context only)": "{:.0f}"})
+    # A hot/cold read on the score column, not a verdict - see theme.py.
+    .map(lambda v: f"color: {theme.score_tier_color(v)}; font-weight: 700;", subset=["Score"]),
+    width="stretch",
     height=600,
 )
 st.caption(
