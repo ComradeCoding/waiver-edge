@@ -104,10 +104,6 @@ if "league_id" not in st.session_state:
     st.session_state.season = None
 
 st.title("🏈 Waiver Edge")
-st.markdown(
-    theme.pill_html("All features free - no paid tier, no signup, no limits"),
-    unsafe_allow_html=True,
-)
 st.write(
     "An opportunity-based waiver-wire and FAAB bid recommender for **redraft** "
     "Sleeper leagues. It pulls the free agents genuinely available in your "

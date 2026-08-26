@@ -210,18 +210,6 @@ input:focus {{ border-color: var(--signal-400) !important; }}
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }}
-
-/* Small status pill - e.g. the "all features free" marker below the title */
-.pill {{
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.2rem 0.7rem;
-  border-radius: 999px;
-  margin: 0.1rem 0 0.75rem 0;
-}}
 </style>
 """
 
@@ -234,8 +222,3 @@ def scoreboard_tile_html(label: str, value: str, color: str, tier_label: str) ->
         f'<span class="tier" style="color:{color}">{tier_label}</span>'
         f"</div>"
     )
-
-
-def pill_html(text: str, color: str = TURF) -> str:
-    """Small rounded-full status pill, e.g. the free-for-now marker under the title."""
-    return f'<span class="pill" style="background-color:{color}22; color:{color};">{text}</span>'
