@@ -1,0 +1,16 @@
+# Dark theme with a teal accent, matching the rest of the tool suite
+# (see Leaguemate Scout). Streamlit reads this automatically - no code
+# needed in app.py to pick these up.
+[theme]
+base = "dark"
+primaryColor = "#2dd4bf"
+backgroundColor = "#0e1117"
+secondaryBackgroundColor = "#1c1f26"
+textColor = "#e6e6e6"
+font = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
