@@ -11,6 +11,14 @@ league baked in. Every visitor brings their own username/league; nothing
 is stored, no login exists, and one visitor's data never leaks into
 another's view (see [Privacy & caching](#privacy--caching) below).
 
+## Pricing
+
+Tabled for now. Every feature and every detailed stat is available to
+every visitor, unrestricted - not as an announced product decision, just
+because free/paid hasn't been decided yet. No feature-gating or paywall
+scaffolding exists in the code; if that gets designed later, build it
+fresh against whatever the actual plan is rather than assuming this note.
+
 ## What it actually does
 
 1. **Pulls your league from Sleeper** - every rostered player and every
